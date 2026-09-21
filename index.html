@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,7 +52,7 @@ h2{font-size:clamp(38px,7vw,65px);color:#5b3048;margin-bottom:20px}
 @keyframes wobble{50%{transform:translateY(-10px) rotate(3deg)}}
 @keyframes pop{50%{transform:scale(1.4);opacity:.7}100%{transform:scale(0);opacity:0}}
 #gameMessage{min-height:45px;margin-top:18px;font-weight:700;color:#a64f78}
-.gift-stage{margin:30px auto 0;display:flex;flex-direction:column;align-items:center;gap:18px}
+.gift-stage{margin:30px auto 0;min-height:330px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
 .gift{font-size:130px;cursor:pointer;transition:.35s;filter:drop-shadow(0 18px 12px #7b4c5a20)}
 .gift:hover{transform:translateY(-8px) rotate(-2deg)}
 .gift.open{animation:giftOpen .8s forwards}
@@ -147,18 +146,65 @@ footer{padding:25px;text-align:center;background:#4b293d;color:#ead5df;font-size
   .bouquet-memory{width:min(100%,340px);padding:7px}
   .bouquet-memory img{max-height:270px}
 }
+</style>
 
-/* Compact, mobile-friendly gift + reasons */
-.reasons-scroll{max-height:360px;overflow:auto;overscroll-behavior:contain;padding:10px 8px 10px 2px;margin:18px 0 22px;border-radius:22px;background:#ffffff6b;border:1px solid #ffffffb3}
-.reasons-scroll .grid{margin:0}
-.reasons-scroll::-webkit-scrollbar{width:7px}
-.reasons-scroll::-webkit-scrollbar-thumb{border-radius:99px;background:#b4789660}
-.gift-memory-image,.bouquet-memory{width:min(100%,520px);margin:12px auto 18px;padding:8px;border-radius:24px;background:#fff;box-shadow:0 14px 32px #7d486021}
-.gift-memory-image img,.bouquet-memory img{display:block;width:100%;height:auto;border-radius:18px;object-fit:contain}
-@keyframes bouquetFloat{0%,100%{transform:translateY(0) rotate(.5deg)}50%{transform:translateY(-6px) rotate(-.5deg)}}
-.bouquet-memory{animation:bouquetFloat 3.5s ease-in-out infinite}
-.gift-title{font-size:38px}.letter-title{font-size:42px}
-@media(max-width:600px){.reasons-scroll{max-height:330px}.gift-note{padding:20px}.gift-memory-image,.bouquet-memory{max-width:340px}}
+<style id="reasons-scroll-style">
+.reasons-scroll{
+  max-height: 360px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 10px 8px 10px 2px;
+  margin: 18px 0 22px;
+  border-radius: 22px;
+  background: rgba(255,255,255,.42);
+  border: 1px solid rgba(255,255,255,.7);
+  box-shadow: inset 0 8px 18px rgba(255,255,255,.35), inset 0 -8px 18px rgba(255,255,255,.25);
+}
+.reasons-scroll .grid{margin:0;}
+.reasons-scroll::-webkit-scrollbar{width:7px;}
+.reasons-scroll::-webkit-scrollbar-thumb{border-radius:99px;background:rgba(180,120,150,.35);}
+.reasons-scroll::-webkit-scrollbar-track{background:transparent;}
+@media (max-width:600px){
+  .reasons-scroll{max-height:330px;}
+}
+</style>
+
+
+<style id="gift-memory-image-style">
+.gift-memory-image{
+  width:min(100%,520px);
+  margin:18px auto 20px;
+  padding:9px;
+  border-radius:22px;
+  background:#fff;
+  box-shadow:0 12px 28px rgba(125,72,96,.14);
+  transform:rotate(-1deg);
+}
+.gift-memory-image img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:15px;
+}
+</style>
+
+
+<style id="bouquet-style">
+.bouquet-memory{
+  width:min(100%,520px);
+  margin:4px auto 18px;
+  padding:8px;
+  border-radius:24px;
+  background:#fff;
+  box-shadow:0 14px 32px rgba(125,72,96,.13);
+  animation:bouquetFloat 3.5s ease-in-out infinite;
+}
+.bouquet-memory img{display:block;width:100%;height:auto;border-radius:18px}
+@keyframes bouquetFloat{
+  0%,100%{transform:translateY(0) rotate(.5deg)}
+  50%{transform:translateY(-6px) rotate(-.5deg)}
+}
 </style>
 
 </head>
@@ -169,6 +215,7 @@ footer{padding:25px;text-align:center;background:#4b293d;color:#ead5df;font-size
 <p id="magicText">Close your eyes, make a wish, then tap below to blow out the candle. 💗</p>
 <button class="magic-btn" id="blowBtn">Blow out the candle 💨</button>
 </div></div>
+
 
 <section class="hero">
   <div class="floating f1">💗</div><div class="floating f2">✨</div>
@@ -212,6 +259,7 @@ footer{padding:25px;text-align:center;background:#4b293d;color:#ead5df;font-size
   </div>
 </section>
 
+
 <section class="interactive" id="balloon-game">
   <div class="section-inner">
     <div class="kicker">Tiny birthday game 🎈</div>
@@ -237,7 +285,7 @@ footer{padding:25px;text-align:center;background:#4b293d;color:#ead5df;font-size
         <div class="gift-memory-image">
   <img src="cake.jpeg" alt="Cute birthday cake and Happy 23rd birthday illustration">
 </div>
-        <h2 class="gift-title">A whole year of happy moments</h2>
+        <h2 style="font-size:38px">A whole year of happy moments</h2>
         <p style="margin:-4px 0 14px;color:#b45f86;font-weight:700">Flowers for the birthday girl, because 23 deserves a bouquet. 💐</p>
         <p style="line-height:1.8;color:#765567">May your 23rd year be full of spontaneous plans, late-night laughs, beautiful pictures, peaceful mornings, and the kind of memories you randomly smile about months later.</p>
       </div>
@@ -249,7 +297,8 @@ footer{padding:25px;text-align:center;background:#4b293d;color:#ead5df;font-size
   <div class="section-inner">
     <div class="kicker">Memory wall</div>
     <h2>Little moments, big memories 📸</h2>
-       <div class="polaroids">
+    <p class="section-copy">These are random placeholders for now. Swap the image URLs and captions with your real memories later.</p>
+    <div class="polaroids">
       <div class="polaroid" style="--r:-3deg"><img src="1.jpeg"><p>That smile ✨</p></div>
       <div class="polaroid" style="--r:2deg"><img src="5.png"><p>Golden little moments</p></div>
       <div class="polaroid" style="--r:-2deg"><img src="9.jpeg"><p>Forever a favorite</p></div>
@@ -266,7 +315,7 @@ footer{padding:25px;text-align:center;background:#4b293d;color:#ead5df;font-size
     <div class="letter-wrap">
       <div class="envelope" id="envelope">💌</div>
       <div class="letter" id="letterCard">
-        <h2 class="letter-title">Dear Birthday Girl,</h2>
+        <h2 style="font-size:42px">Dear Birthday Girl,</h2>
         <p>Some people make life louder. Some make it lighter. You somehow manage to do both.</p>
         <p style="margin-top:14px">I hope you never forget how many beautiful things there are still waiting for you. Keep laughing too hard, taking too many pictures, making questionable decisions that become great stories, and being exactly who you are.</p>
         <p style="margin-top:14px">Happy 23rd. Here's to your next chapter — may it be ridiculously good. 💗</p>
@@ -282,7 +331,7 @@ footer{padding:25px;text-align:center;background:#4b293d;color:#ead5df;font-size
     <h2>Birthday soundtrack</h2>
     <p class="section-copy">Tap once to start the birthday melody — it is built directly into this page. 🎶</p>
     <button class="btn" id="musicBtn">▶ Play birthday vibes</button>
-    <audio id="birthdayAudio" loop preload="auto"><source src="happy_birthday_piano.wav" type="audio/wav"></audio>
+    <audio id="birthdayAudio" loop preload="auto"><source src="the_mountain-happy-birthday-576570.mp3" type="audio/wav"></audio>
   </div>
 </section>
 
@@ -347,6 +396,7 @@ footer{padding:25px;text-align:center;background:#4b293d;color:#ead5df;font-size
   </div>
 </section>
 
+
 <div class="wish-modal" id="wishModal" aria-hidden="true">
  <div class="wish-popup">
   <div class="wish-icon" id="wishIcon">🎈</div>
@@ -365,6 +415,7 @@ footer{padding:25px;text-align:center;background:#4b293d;color:#ead5df;font-size
   </div>
 </div>
 <footer>Made with love, sparkles & a little bit of chaos 🎀</footer>
+
 
 <script>
 let current=0;
@@ -404,6 +455,7 @@ function celebrateSmall(){for(let i=0;i<20;i++){let e=document.createElement('di
 const gift=document.getElementById('giftBox'),note=document.getElementById('giftNote');
 function openGift(){if(gift.dataset.opened==='true')return;gift.dataset.opened='true';gift.classList.add('open');note.classList.add('show');for(let i=0;i<18;i++){let e=document.createElement('div');e.className='confetti';e.textContent=['💗','✨','🎀','⭐'][i%4];e.style.left=(35+Math.random()*30)+'%';e.style.animationDelay=Math.random()*.5+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),4000)}}
 gift.onclick=openGift;
+gift.addEventListener('touchend',e=>{e.preventDefault();openGift()});
 
 // 3. Letter
 document.getElementById('envelope').onclick=()=>{
@@ -458,6 +510,9 @@ document.getElementById('closeFinal').onclick=()=>overlay.classList.remove('show
 
 // Make replay link actually go home.
 document.querySelector('.final .btn[href="#"]').onclick=(e)=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})};
+
+
+
 
 </script>
 </body>
